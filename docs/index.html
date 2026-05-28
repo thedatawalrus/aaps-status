@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>aaps recorder · status</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --bg-elev: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --text-faint: #6e7681;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --amber: #d29922;
+    --red: #f85149;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff;
+      --bg-elev: #f6f8fa;
+      --border: #d0d7de;
+      --text: #1f2328;
+      --text-dim: #656d76;
+      --text-faint: #8c959f;
+      --accent: #0969da;
+      --green: #1a7f37;
+      --amber: #9a6700;
+      --red: #cf222e;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  header h1 .prompt { color: var(--text-faint); }
+  header h1 .ctx { color: var(--text-dim); }
+
+  .last-update {
+    color: var(--text-faint);
+    font-size: 0.85rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+  section h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin: 0 0 0.75rem;
+    font-weight: 500;
+  }
+
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .row:last-child { border-bottom: none; }
+  .row .label { color: var(--text-dim); flex-shrink: 0; }
+  .row .value { text-align: right; word-break: break-word; }
+
+  .status-dot {
+    display: inline-block;
+    width: 0.55em; height: 0.55em;
+    border-radius: 50%;
+    margin-right: 0.4em;
+    vertical-align: 0.1em;
+  }
+  .dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .dot-amber { background: var(--amber); }
+  .dot-red { background: var(--red); }
+  .dot-gray { background: var(--text-faint); }
+
+  .pulse-green {
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--green), 0 0 6px var(--green); }
+    50% { box-shadow: 0 0 0 6px transparent, 0 0 12px var(--green); }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--text-dim);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .empty {
+    color: var(--text-faint);
+    padding: 0.5rem 0;
+    font-style: italic;
+  }
+
+  .bytes {
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .growing::after {
+    content: " ↑";
+    color: var(--green);
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .stale::after {
+    content: " (stale)";
+    color: var(--text-faint);
+    font-size: 0.85em;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>
+    <span class="prompt">$</span> aaps recorder
+    <span class="ctx">· status</span>
+  </h1>
+  <span class="last-update" id="last-update">loading...</span>
+</header>
+
+<section>
+  <h2>VM</h2>
+  <div class="card">
+    <div class="row">
+      <span class="label">status</span>
+      <span class="value" id="vm-status">—</span>
+    </div>
+    <div class="row">
+      <span class="label">last seen</span>
+      <span class="value" id="vm-last-seen">—</span>
+    </div>
+  </div>
+</section>
+
+<section id="current-section">
+  <h2>Current recording</h2>
+  <div class="card" id="current-card">
+    <div class="empty">no recording in progress</div>
+  </div>
+</section>
+
+<section>
+  <h2>Upcoming meetings</h2>
+  <div id="upcoming">
+    <div class="empty">no upcoming meetings scheduled</div>
+  </div>
+</section>
+
+<section>
+  <h2>Recent recordings</h2>
+  <div id="history">
+    <div class="empty">no recordings yet</div>
+  </div>
+</section>
+
+<footer>
+  <span>updated every <span id="poll-interval">60</span>s</span>
+  <span><a href="https://github.com/thedatawalrus/aaps-status">github</a></span>
+</footer>
+
+</div>
+
+<script>
+const STATUS_URL = "status.json?t=" + Date.now();
+let POLL_SLOW = 60_000;   // when nothing's recording
+let POLL_FAST = 5_000;    // when actively recording
+let pollTimer = null;
+
+function fmtBytes(n) {
+  if (!n && n !== 0) return "—";
+  if (n < 1024) return n + " B";
+  if (n < 1024 * 1024) return (n / 1024).toFixed(1) + " KB";
+  if (n < 1024 * 1024 * 1024) return (n / (1024 * 1024)).toFixed(1) + " MB";
+  return (n / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+}
+
+function fmtDuration(seconds) {
+  if (!seconds && seconds !== 0) return "—";
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  if (h > 0) return `${h}h ${m}m ${s}s`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
+}
+
+function fmtRelative(iso) {
+  if (!iso) return "—";
+  const then = new Date(iso);
+  const now = new Date();
+  const seconds = Math.floor((now - then) / 1000);
+  if (seconds < 60) return `${seconds}s ago`;
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+  return `${Math.floor(seconds / 86400)}d ago`;
+}
+
+function fmtLocal(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return d.toLocaleString(undefined, {
+    month: "short", day: "numeric",
+    hour: "numeric", minute: "2-digit",
+  });
+}
+
+function dotFor(state) {
+  switch (state) {
+    case "recording": return '<span class="status-dot pulse-green"></span>';
+    case "idle":      return '<span class="status-dot dot-gray"></span>';
+    case "uploading": return '<span class="status-dot dot-amber"></span>';
+    case "merging":   return '<span class="status-dot dot-amber"></span>';
+    case "error":     return '<span class="status-dot dot-red"></span>';
+    case "off":       return '<span class="status-dot dot-gray"></span>';
+    default:          return '<span class="status-dot dot-gray"></span>';
+  }
+}
+
+function render(data) {
+  document.getElementById("last-update").textContent =
+    "updated " + fmtRelative(data.generated_at);
+
+  // VM
+  const vm = data.vm || {};
+  document.getElementById("vm-status").innerHTML =
+    dotFor(vm.status) + (vm.status || "unknown");
+  document.getElementById("vm-last-seen").textContent =
+    fmtRelative(vm.last_seen) + " (" + fmtLocal(vm.last_seen) + ")";
+
+  // Current recording
+  const current = data.current_recording;
+  const currentCard = document.getElementById("current-card");
+  if (current) {
+    let html = "";
+    html += `<div class="row"><span class="label">meeting</span><span class="value">${escape(current.meeting || "—")}</span></div>`;
+    html += `<div class="row"><span class="label">phase</span><span class="value">${dotFor(current.phase)}${escape(current.phase || "—")}</span></div>`;
+    html += `<div class="row"><span class="label">started</span><span class="value">${fmtRelative(current.started_at)} (${fmtLocal(current.started_at)})</span></div>`;
+    if (current.elapsed_seconds !== undefined) {
+      html += `<div class="row"><span class="label">elapsed</span><span class="value">${fmtDuration(current.elapsed_seconds)}</span></div>`;
+    }
+
+    const vClass = current.video_growing ? "bytes growing" : "bytes" + (current.video_bytes ? " stale" : "");
+    const aClass = current.audio_growing ? "bytes growing" : "bytes" + (current.audio_bytes ? " stale" : "");
+    html += `<div class="row"><span class="label">video</span><span class="value ${vClass}">${fmtBytes(current.video_bytes)}</span></div>`;
+    html += `<div class="row"><span class="label">audio</span><span class="value ${aClass}">${fmtBytes(current.audio_bytes)}</span></div>`;
+    currentCard.innerHTML = html;
+  } else {
+    currentCard.innerHTML = '<div class="empty">no recording in progress</div>';
+  }
+
+  // Upcoming
+  const upcomingDiv = document.getElementById("upcoming");
+  const upcoming = data.upcoming || [];
+  if (upcoming.length === 0) {
+    upcomingDiv.innerHTML = '<div class="empty">no upcoming meetings scheduled</div>';
+  } else {
+    let html = '<table><thead><tr><th>date</th><th>time</th><th>meeting</th></tr></thead><tbody>';
+    for (const m of upcoming) {
+      html += `<tr><td>${escape(m.date || "—")}</td><td>${escape(m.time || "—")}</td><td>${escape(m.meeting || "—")}</td></tr>`;
+    }
+    html += '</tbody></table>';
+    upcomingDiv.innerHTML = html;
+  }
+
+  // History
+  const historyDiv = document.getElementById("history");
+  const history = data.history || [];
+  if (history.length === 0) {
+    historyDiv.innerHTML = '<div class="empty">no recordings yet</div>';
+  } else {
+    let html = '<table><thead><tr><th>recorded</th><th>meeting</th><th>duration</th><th>status</th><th>link</th></tr></thead><tbody>';
+    for (const h of history) {
+      const link = h.drive_url
+        ? `<a href="${h.drive_url}" target="_blank" rel="noopener">drive</a>`
+        : '<span class="empty">—</span>';
+      html += `<tr>
+        <td>${fmtLocal(h.recorded_at)}</td>
+        <td>${escape(h.meeting || "—")}</td>
+        <td>${fmtDuration(h.duration_seconds)}</td>
+        <td>${dotFor(h.status)}${escape(h.status || "—")}</td>
+        <td>${link}</td>
+      </tr>`;
+    }
+    html += '</tbody></table>';
+    historyDiv.innerHTML = html;
+  }
+
+  // Schedule next poll based on whether anything is recording
+  const fast = !!current;
+  const interval = fast ? POLL_FAST : POLL_SLOW;
+  document.getElementById("poll-interval").textContent = (interval / 1000).toFixed(0);
+  scheduleNextPoll(interval);
+}
+
+function escape(s) {
+  return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+}
+
+async function load() {
+  try {
+    const resp = await fetch("status.json?t=" + Date.now(), { cache: "no-store" });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const data = await resp.json();
+    render(data);
+  } catch (e) {
+    console.error("Failed to load status:", e);
+    document.getElementById("last-update").textContent = "load failed: " + e.message;
+    scheduleNextPoll(POLL_SLOW);
+  }
+}
+
+function scheduleNextPoll(ms) {
+  if (pollTimer) clearTimeout(pollTimer);
+  pollTimer = setTimeout(load, ms);
+}
+
+load();
+</script>
+</body>
+</html>
