@@ -1,19 +1,10 @@
 {
-  "generated_at": "2026-05-28T23:21:38Z",
+  "generated_at": "2026-05-29T12:01:38Z",
   "vm": {
     "status": "idle",
-    "last_seen": "2026-05-28T23:21:38Z"
+    "last_seen": "2026-05-29T12:01:38Z"
   },
-  "upcoming": [
-    {
-      "date": "May 28, 2026",
-      "time": "3:30 PM",
-      "meeting": "Governance Committee",
-      "zoom_link": "https://a2schools.zoom.us/j/82569745583",
-      "utc_start": 1779996600,
-      "source": "portal"
-    }
-  ],
+  "upcoming": [],
   "current_recording": null,
   "history": []
 }
