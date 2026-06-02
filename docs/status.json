@@ -1,19 +1,10 @@
 {
-  "generated_at": "2026-06-01T12:01:41Z",
+  "generated_at": "2026-06-02T12:01:55Z",
   "vm": {
     "status": "idle",
-    "last_seen": "2026-06-01T12:01:41Z"
+    "last_seen": "2026-06-02T12:01:55Z"
   },
-  "upcoming": [
-    {
-      "date": "Monday, June 1, 2026",
-      "time": "4:00 PM",
-      "meeting": "Finance/Planning Committee",
-      "zoom_link": "https://a2schools.zoom.us/j/83424209782",
-      "utc_start": 1780344000,
-      "source": "website"
-    }
-  ],
+  "upcoming": [],
   "current_recording": null,
   "history": []
 }
