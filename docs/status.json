@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-03T23:20:28Z",
+  "generated_at": "2026-06-03T23:23:29Z",
   "vm": {
     "status": "recording",
-    "last_seen": "2026-06-03T23:20:28Z"
+    "last_seen": "2026-06-03T23:23:29Z"
   },
   "upcoming": [
     {
@@ -26,9 +26,9 @@
     "meeting": "Special_Meeting_-_vote_to_hold_a_Closed_Session_",
     "phase": "recording",
     "started_at": "2026-06-03T21:29:01Z",
-    "elapsed_seconds": 6687,
-    "video_bytes": 94109696,
-    "audio_bytes": 13631488,
+    "elapsed_seconds": 6867,
+    "video_bytes": 100663296,
+    "audio_bytes": 18087936,
     "video_growing": true,
     "audio_growing": true
   },
