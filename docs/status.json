@@ -1,10 +1,27 @@
 {
-  "generated_at": "2026-06-02T12:01:55Z",
+  "generated_at": "2026-06-03T12:01:59Z",
   "vm": {
     "status": "idle",
-    "last_seen": "2026-06-02T12:01:55Z"
+    "last_seen": "2026-06-03T12:01:59Z"
   },
-  "upcoming": [],
+  "upcoming": [
+    {
+      "date": "June 03, 2026",
+      "time": "5:30 pm",
+      "meeting": "Special Meeting - , (vote to hold a Closed Session)",
+      "zoom_link": "https://a2schools.zoom.us/j/82346962954",
+      "utc_start": 1780522200,
+      "source": "portal"
+    },
+    {
+      "date": "June 03, 2026",
+      "time": "7pm",
+      "meeting": "Regular Meeting",
+      "zoom_link": "https://a2schools.zoom.us/j/82346962954",
+      "utc_start": 1780527600,
+      "source": "portal"
+    }
+  ],
   "current_recording": null,
   "history": []
 }
