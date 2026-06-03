@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-03T21:16:37Z",
+  "generated_at": "2026-06-03T21:29:04Z",
   "vm": {
-    "status": "idle",
-    "last_seen": "2026-06-03T21:16:37Z"
+    "status": "recording",
+    "last_seen": "2026-06-03T21:29:04Z"
   },
   "upcoming": [
     {
@@ -22,6 +22,15 @@
       "source": "portal"
     }
   ],
-  "current_recording": null,
+  "current_recording": {
+    "meeting": "Special_Meeting_-_vote_to_hold_a_Closed_Session_",
+    "phase": "recording",
+    "started_at": "2026-06-03T21:29:01Z",
+    "elapsed_seconds": 2,
+    "video_bytes": 0,
+    "audio_bytes": 0,
+    "video_growing": false,
+    "audio_growing": false
+  },
   "history": []
 }
