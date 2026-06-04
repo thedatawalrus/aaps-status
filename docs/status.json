@@ -1,36 +1,10 @@
 {
-  "generated_at": "2026-06-04T03:15:38Z",
+  "generated_at": "2026-06-04T12:01:43Z",
   "vm": {
-    "status": "recording",
-    "last_seen": "2026-06-04T03:15:38Z"
+    "status": "idle",
+    "last_seen": "2026-06-04T12:01:43Z"
   },
-  "upcoming": [
-    {
-      "date": "June 03, 2026",
-      "time": "5:30 pm",
-      "meeting": "Special Meeting - , (vote to hold a Closed Session)",
-      "zoom_link": "https://a2schools.zoom.us/j/82346962954",
-      "utc_start": 1780522200,
-      "source": "portal"
-    },
-    {
-      "date": "June 03, 2026",
-      "time": "7pm",
-      "meeting": "Regular Meeting",
-      "zoom_link": "https://a2schools.zoom.us/j/82346962954",
-      "utc_start": 1780527600,
-      "source": "portal"
-    }
-  ],
-  "current_recording": {
-    "meeting": "Special_Meeting_-_vote_to_hold_a_Closed_Session_",
-    "phase": "recording",
-    "started_at": "2026-06-03T21:29:01Z",
-    "elapsed_seconds": 20797,
-    "video_bytes": 1878563219,
-    "audio_bytes": 188000714,
-    "video_growing": false,
-    "audio_growing": false
-  },
+  "upcoming": [],
+  "current_recording": null,
   "history": []
 }
