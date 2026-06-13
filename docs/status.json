@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-06-13T01:34:07Z",
+  "generated_at": "2026-06-13T01:40:12Z",
   "vm": {
     "status": "recording",
-    "last_seen": "2026-06-13T01:34:07Z"
+    "last_seen": "2026-06-13T01:40:12Z"
   },
   "upcoming": [],
   "current_recording": {
     "meeting": "Test_Recording_status_2",
-    "phase": "merging",
+    "phase": "uploading",
     "started_at": "2026-06-13T01:16:42Z",
-    "elapsed_seconds": 1045,
-    "video_bytes": 3778959,
-    "audio_bytes": 635684,
-    "video_growing": true,
-    "audio_growing": true
+    "elapsed_seconds": 1410,
+    "video_bytes": 0,
+    "audio_bytes": 0,
+    "video_growing": false,
+    "audio_growing": false
   },
   "history": [
     {
