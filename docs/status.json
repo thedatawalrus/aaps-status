@@ -1,10 +1,44 @@
 {
-  "generated_at": "2026-06-12T20:00:04Z",
+  "generated_at": "2026-06-13T01:34:07Z",
   "vm": {
-    "status": "idle",
-    "last_seen": "2026-06-12T20:00:04Z"
+    "status": "recording",
+    "last_seen": "2026-06-13T01:34:07Z"
   },
   "upcoming": [],
-  "current_recording": null,
-  "history": []
+  "current_recording": {
+    "meeting": "Test_Recording_status_2",
+    "phase": "merging",
+    "started_at": "2026-06-13T01:16:42Z",
+    "elapsed_seconds": 1045,
+    "video_bytes": 3778959,
+    "audio_bytes": 635684,
+    "video_growing": true,
+    "audio_growing": true
+  },
+  "history": [
+    {
+      "meeting": "Test_Recording_status",
+      "recorded_at": "2026-06-13T00:50:19Z",
+      "duration_seconds": 1032,
+      "final_file": "Test_Recording_status_2026-06-13_00-50-19.mkv",
+      "drive_url": "https://drive.google.com/open?id=1qEZWCdDkgInfPSl88Ea9AAJG3ohRUtOr",
+      "status": "uploaded"
+    },
+    {
+      "meeting": "Test_Recording",
+      "recorded_at": "2026-06-13T00:37:49Z",
+      "duration_seconds": 246,
+      "final_file": "Test_Recording_2026-06-13_00-37-49.mkv",
+      "drive_url": "https://drive.google.com/open?id=1-26pJm2TzVZdHe_3CkgKb-BTJ3UC-YI5",
+      "status": "uploaded"
+    },
+    {
+      "meeting": "Test_Recording",
+      "recorded_at": "2026-06-12T20:52:22Z",
+      "duration_seconds": 153,
+      "final_file": "Test_Recording_2026-06-12_20-52-22.mkv",
+      "drive_url": "https://drive.google.com/open?id=1k_EQUtmPGkqYCib-FoLoW9otybISe79g",
+      "status": "uploaded"
+    }
+  ]
 }
