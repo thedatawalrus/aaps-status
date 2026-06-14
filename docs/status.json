@@ -1,27 +1,10 @@
 {
-  "generated_at": "2026-06-14T20:55:39Z",
+  "generated_at": "2026-06-14T21:10:33Z",
   "vm": {
     "status": "idle",
-    "last_seen": "2026-06-14T20:55:39Z"
+    "last_seen": "2026-06-14T21:10:33Z"
   },
   "upcoming": [],
   "current_recording": null,
-  "history": [
-    {
-      "meeting": "Test_Recording_status_5",
-      "recorded_at": "2026-06-14T20:47:17Z",
-      "duration_seconds": 502,
-      "final_file": "Test_Recording_status_5_2026-06-14_20-47-17.mkv",
-      "drive_url": "https://drive.google.com/open?id=1vCJJ8_R6epJpJZ5vc5lkq4woqK1Ri0dK",
-      "status": "uploaded"
-    },
-    {
-      "meeting": "Test_Recording_status_4",
-      "recorded_at": "2026-06-14T20:24:20Z",
-      "duration_seconds": 552,
-      "final_file": "Test_Recording_status_4_2026-06-14_20-24-20.mkv",
-      "drive_url": "https://drive.google.com/open?id=1obb0nNtCEy9kmCdwZR-kteWK-5ZMBaww",
-      "status": "uploaded"
-    }
-  ]
+  "history": []
 }
