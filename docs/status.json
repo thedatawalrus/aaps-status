@@ -1,21 +1,20 @@
 {
-  "generated_at": "2026-06-14T20:55:17Z",
+  "generated_at": "2026-06-14T20:55:39Z",
   "vm": {
-    "status": "running",
-    "last_seen": "2026-06-14T20:55:17Z"
+    "status": "idle",
+    "last_seen": "2026-06-14T20:55:39Z"
   },
   "upcoming": [],
-  "current_recording": {
-    "meeting": "Test_Recording_status_5",
-    "phase": "uploading",
-    "started_at": "2026-06-14T20:47:17Z",
-    "elapsed_seconds": 480,
-    "video_bytes": 0,
-    "audio_bytes": 0,
-    "video_growing": false,
-    "audio_growing": false
-  },
+  "current_recording": null,
   "history": [
+    {
+      "meeting": "Test_Recording_status_5",
+      "recorded_at": "2026-06-14T20:47:17Z",
+      "duration_seconds": 502,
+      "final_file": "Test_Recording_status_5_2026-06-14_20-47-17.mkv",
+      "drive_url": "https://drive.google.com/open?id=1vCJJ8_R6epJpJZ5vc5lkq4woqK1Ri0dK",
+      "status": "uploaded"
+    },
     {
       "meeting": "Test_Recording_status_4",
       "recorded_at": "2026-06-14T20:24:20Z",
